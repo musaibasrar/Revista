@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+
+.border-bottom {
+    border-bottom: 1px solid #032f5a!important;
+}
+
+.bg-light{
+	background-color: #ffffff!important;
+}

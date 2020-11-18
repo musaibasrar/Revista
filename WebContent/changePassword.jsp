@@ -255,6 +255,37 @@
         <script src="JavaScript/actb.js"></script>
         <script src="JavaScript/common.js"></script>
 
+
+
+
+        <script>
+            $(function() {
+                $("#datepicker").datepicker({changeYear: true, changeMonth: true});
+                $("#anim").change(function() {
+                    $("#datepicker").datepicker("option", "showAnim", $(this).val());
+                });
+                 $("#datepickercredits").datepicker({changeYear: true, changeMonth: true});
+                $("#anim").change(function() {
+                    $("#datepickercredits").datepicker("option", "showAnim", $(this).val());
+                });
+                 $("#datepickercredittodate").datepicker({changeYear: true, changeMonth: true});
+                $("#anim").change(function() {
+                    $("#datepickercredittodate").datepicker("option", "showAnim", $(this).val());
+                });
+                $("#datepickercompls").datepicker({changeYear: true, changeMonth: true});
+                $("#anim").change(function() {
+                    $("#datepickercompls").datepicker("option", "showAnim", $(this).val());
+                });
+                 $("#datepickercomplstodate").datepicker({changeYear: true, changeMonth: true});
+                $("#anim").change(function() {
+                    $("#datepickercomplstodate").datepicker("option", "showAnim", $(this).val());
+                });
+            });
+
+        </script>
+
+
+
         <script>
 
         function validatePassword()
@@ -320,22 +351,6 @@
  
        
     </head>
-    <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
     <body onload="hide()"><form id="form1"  method="post" >
             
 
@@ -383,7 +398,7 @@ for(Cookie cookie : cookies){
 
                                 <td width="28%"  >
                                     <label>
-                                        <input name="currentpassword" type="password"  class="textField" id="currentpassword" required size="36"  >
+                                        <input name="currentpassword" type="password"  class="textField" id="currentpassword"  size="36"  >
                                     </label>
 
                                 </td>
@@ -409,7 +424,7 @@ for(Cookie cookie : cookies){
                                 </td>
                                 <td  >
                                     <label>
-                                        <input name="newpassword" type="password"  class="textField" id="newpassword" required size="36"  >
+                                        <input name="newpassword" type="password"  class="textField" id="newpassword"  size="36"  >
                                     </label>
                                 </td>
                             </tr>
@@ -436,7 +451,7 @@ for(Cookie cookie : cookies){
 
                                 <td>
                                     <label>
-                                        <input name="confirmpassword" type="password"  class="textField" id="confirmpassword" required size="36"  >
+                                        <input name="confirmpassword" type="password"  class="textField" id="confirmpassword"  size="36"  >
                                     </label>
                                 </td>
 
@@ -510,10 +525,45 @@ for(Cookie cookie : cookies){
                 form1.submit();
 
             }
-         
+            
+            function searchBetweenDatesCreditS() {
+
+                var form1 = document.getElementById("form1");
+                form1.action = "Controller?process=Search&action=searchbydatescredits";
+                form1.submit();
+
+            }
+            function searchBetweenDatesComplS() {
+
+                var form1 = document.getElementById("form1");
+                form1.action = "Controller?process=Search&action=searchbydatescompls";
+                form1.submit();
+
+            }
+
+            function searchBetweenDates1() {
+                alert("In search between dates");
+                var fromdate = document.getElementById("datepicker");
+                var todate = document.getElementById("datepickertodate");
+                var fromDate = fromdate.options[fromdate.selectedIndex].text;
+                var toDate = todate.options[todate.selectedIndex].text;
+
+                if (fromDate === "") {
+                    document.getElementById("datepicker").style.display = "none";
+                    document.getElementById("datepickertodate").style.display = "none";
+
+                } else {
+                    alert("In else of search between dates")
+                    var form1 = document.getElementById("form1");
+
+                    form1.action = "Controller?process=Search&action=searchbydates";
+                    form1.submit();
+                }
+            }
+
             function Cancel() {
                 var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=StudentProcess&action=viewAll";
+                form1.action = "Controller?process=PersonalProcess&action=print";
                 form1.submit();
             }
 
@@ -540,10 +590,15 @@ for(Cookie cookie : cookies){
                 var txtBox = document.getElementById(elementName);
                 if (txtBox.value != "") {
                     txtBox.className = "textField";
+
                 }
                 else if (txtBox.value == "") {
                     txtBox.className = "emptyFieldSet";
+
                 }
+
+
+
             }
         </script>
     </body>

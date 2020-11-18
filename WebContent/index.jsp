@@ -1,13 +1,11 @@
 <%-- 
     Document   : index
-    Created on : Dec 29, 2011, 5:42:37 PM
-    Author     : Musaib
+    Created on : Jun 13, 2013, 12:14:06 PM
+    Author     : CPEDUR1P5
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -56,32 +54,15 @@
         </script>
     </head>
 
+    <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
+        <frame   src="header.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0" />
 
-<%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
-    <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="header.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
-
-            <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="left.jsp" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="Controller?process=StudentProcess&action=viewAll" name="mainFrame" scrolling="yes" />
+            <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
+                <frame  src="left.jsp" name="leftFrame" scrolling="NO"  frameborder="1"   />
+                <frame src="Controller?process=PersonalProcess&action=viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
-   </frameset>
+
 
 
 

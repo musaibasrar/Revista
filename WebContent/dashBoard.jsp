@@ -1,269 +1,252 @@
 <%-- 
-    Document   : notSaved
-    Created on : Jan 5, 2012, 1:11:53 PM
+    Document   : Dash Board
+    Created on : Nov 11, 2020, 3:48:17 PM
     Author     : Musaib
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dash Board</title>
-        <style type="text/css" title="currentStyle">
-            @import "css/dataTable/css/demo_page.css";
-            @import "css/dataTable/css/jquery.dataTables.css";
-        </style>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.button.js"></script>
-        
-        
-         <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="js/jquery.jqplot.min.js" ></script>
-        <script src="js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
-        
-        
-        
-        
-        <style type="text/css">
-<!--
-.divCSS {
-	height: 40px;
-	width: 200px;
-	border: 1px solid #305876;
-	
-}
-.tableCSS {
-	background-position: center center;
-	vertical-align: middle;
-	height: 140px;
-	width: 100%;
-}
-.style1 {
-	font-family: Tahoma;
-	font-weight: bold;
-	color: #5E87B0;
-        font-size: 12px;
-}
-.style2 {
-	font-size: 12px;
-	color: #000000;
-}
--->
-        </style>
+<html >
+    <head >
+     <%
+            response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
+            response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
+            response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+        %>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- <link href="css/bootstrap.min.css" rel="stylesheet"  />-->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet" /> 
+        <script src="js/all.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+      <!--  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script> -->
 
-        <script type="text/javascript">
-            $(function(){
-                $("#view").button()
-                
-                $("#addnew").button()
-
-                });
-
-            function ViewAll(){
-                var form1=document.getElementById("form1");
-                form1.action="Controller?process=PersonalProcess&action=viewAll";
-                form1.submit();
-            }
-        </script>
-        
-        <script type="text/javascript">
-        function drawChart() {
-        	  var slice_1 = ['I', 10];
-        	  var slice_2 = ['II', 0];
-        	  var slice_3 = ['III', 200];
-        	  var slice_4 = ['IV', 50];
-        	  var slice_5 = ['V', 15];
-        	  var slice_6 = ['VI', 5];
-        	  var slice_7 = ['VII', 5];
-        	  var slice_8 = ['VIII', 5];
-        	  var slice_9 = ['IX', 5];
-        	  var slice_0 = ['X', 5];
-        	  var series = [slice_1, slice_2, slice_3, slice_4, slice_5, slice_6, slice_7, slice_8, slice_9, slice_0];
-        	  var data = [series];
-        	 
-        	  var options = {
-        	    title: 'Students per class',
-        	    seriesDefaults: {
-        	      renderer: jQuery.jqplot.PieRenderer
-        	    },
-        	    legend: { show:true, location: 'e' }
-        	  };
-        	   
-        	  $.jqplot('chartDivId', data, options);
-        	}
-        </script>
-</head>
-<%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
+       
+    </head>
+    <%
+	//allow access only if session exists
+	String user = null;
+	if (session.getAttribute("userAuth") == null) {
+		response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	} else
+		user = (String) session.getAttribute("userAuth");
+	String userName = null;
+	String sessionID = null;
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("user"))
+				userName = cookie.getValue();
+			if (cookie.getName().equals("JSESSIONID"))
+				sessionID = cookie.getValue();
+		}
+	}
 %>
-    <body background="images/bg.jpg" onload='drawChart()'>
-    <div id="chartDivId" style="margin-top:20px; margin-left:20px; width:600px; height:300px;"></div>
-        <form id="form1" method="post">
-            
-          <!--  <table height="462" class="tableCSS"  >
-    <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Registration Successful</p>
-        <p class="style1">
-            <label>${noOfRecordsOfSubscribers}</label>
-            <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addContact.jsp';">
-        </p></
-            </table> -->
-            
-      <div align="center">
-          <label   style="font-family: Tahoma;
-	font-weight: bolder;
-	color: #5E87B0;
-        font-size: 20px;"> DASH BOARD </label> 
-          <br/><br/>
-          <table  border="0" cellpadding="5" >
-          
-          
-          <tr>
-          <td>
-           <table  border="0" cellpadding="5" >
-  	<tr>
- 
-      <td align="right" valign="middle"><p class="style1">Total Number Of Students</p> </td>
-    <td align="center" valign="middle"><p class="style1">${totalStudents}</td>
-    </tr>
-    
-    <tr>
-    
-    <td align="right" valign="middle"><p class="style1">Total Number Of Employees</p></td>
-    <td align="right" valign="middle"><p class="style1">${totalNoOfEmployees}</p></td>
-    
-    </tr>
-  
-  		</table>
-  </td>
-  <td></td>
-  <td>
-   	 <table  border="0" cellpadding="5" >
-  
-  <tr>
- 
-      
-     <td align="right" valign="middle"><p class="style1">Total Number Of Students Class : Nursery</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentNursery}</p></td>
-  </tr>
-  
-  <tr>
- 
-      
-     <td align="right" valign="middle"><p class="style1">Total Number Of Students Class : L.K.G</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentLKG}</p></td>
-  </tr>
-  
-  <tr>
- 
-      
-     <td align="right" valign="middle"><p class="style1">Total Number Of Students Class : U.K.G</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentUKG}</p></td>
-  </tr>
-   <tr>
- 
-      
-     <td align="right" valign="middle"><p class="style1">Total Number Of Students Class : I</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentOne}</p></td>
-  </tr>
-  
-  <tr>
- 	
-    
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: II</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentTwo}</p></td>
- </tr>
-  
-   <tr>
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: III</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentThree}</p></td>
-  </tr>
-  
-    <tr>
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: IV</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentFour}</p></td>
-  </tr>
-  
-   <tr>
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: V</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentFive}</p></td>
-  </tr>
-  
-  
- 
-  <tr>
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: VI</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentSix}</p></td>
-  </tr>
-  
-  
-  <tr>
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: VII</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentSeven}</p></td>
-  </tr>
-  
-   <tr>
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: VIII</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentEight}</p></td>
-  </tr>
-  
-   
-  <tr>
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: IX</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentNine}</p></td>
-  </tr>
-  
-    <tr>
-    <td align="right" valign="middle"><p class="style1">Total Number Of Students Class: X</p></td>
-    <td align="right" valign="middle"><p class="style1">${studentTen}</p></td>
-  </tr>
-  
- 	 </table>
-  
-      </td>    
-          
-          
-          
-          </tr>
- 
- 
-</table>
-</div>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark border-bottom">
+            <a class="navbar-brand" href="#"><img src="images/schoolcarelogoheader.png" height="60" width="200"></a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id="form2" method="post">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="subscribersname" placeholder="Search for Subscribers..." aria-label="Search" aria-describedby="basic-addon2" required/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" name="subscribersearch" onclick="getSubscriber();"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
             </form>
+            <!-- Navbar-->
+            <form id="form3" method="post">
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="Controller?process=UserProcess&action=logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            </form>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                        	<div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=dashBoard">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Subscribers</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                               		Paid Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAll">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriber">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expire">Expiring</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutscomp" aria-expanded="false" aria-controls="collapseLayoutscomp">
+                                <div class="sb-nav-link-icon"><i class="far fa-address-book"></i></div>
+                               		Comp. Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutscomp" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllComplementary">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriberComp">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expirecomp">Expiring</a>
+                                </nav>
+                            </div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutscredit" aria-expanded="false" aria-controls="collapseLayoutscredit">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               		Credit Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutscredit" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllCreditS">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriberCredit">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expirecredit">Expiring</a>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Addons</div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsprint" aria-expanded="false" aria-controls="collapseLayoutsprint">
+                                <div class="sb-nav-link-icon"><i class="fas fa-print"></i></div>
+                               		Print
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsprint" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=print">Paid Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=printCompl">Comp. Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=printCredit">Credit Subscribers</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsconfirmprint" aria-expanded="false" aria-controls="collapseLayoutsconfirmprint">
+                                <div class="sb-nav-link-icon"><i class="fas fa-paper-plane"></i></div>
+                               		Confirm Dispatch
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsconfirmprint" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintPaid">Paid Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintComp">Comp. Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintCredit">Credit Subscribers</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=advanceSearch">
+                                <div class="sb-nav-link-icon"><i class="fab fa-searchengin"></i></div>
+                                Advance Search
+                            </a>
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllArchive">
+                                <div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>
+                                Archive
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Executives</div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsexecutive" aria-expanded="false" aria-controls="collapseLayoutsexecutive">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
+                               		Executive
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsexecutive" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="addExecutive.jsp">Add New</a>
+                                    <a class="nav-link" href="Controller?process=ExecutiveProcess&action=viewAllExecutive">View All</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Start Bootstrap
+                    </div> -->
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                <div class="container-fluid">
+                			<br>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                        <div class="row">
+                        	<div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Paid Subscribers: ${noOfRecordsOfSubscribers}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="Controller?process=PersonalProcess&action=viewAll">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Comp. Subscribers: ${noOfRecordsOfComplSubscribers}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="Controller?process=PersonalProcess&action=viewAllComplementary">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Credit Subscribers: ${noOfCreditSubscribers}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="Controller?process=PersonalProcess&action=viewAllCreditS">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Expiring Subscribers: ${noOfRecordsOfExpiringSubscribers}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="Controller?process=PersonalProcess&action=expiringAll">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted"></div>
+                            <div>
+                                <p>Powered By <a href="www.ideoholic.com">IDEOHOLIC</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        
+         <script src="js/jquery-3.5.1.slim.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/dataTable/jquery.dataTables.min.js"></script>
+		<script src="js/dataTables.bootstrap4.min.js" ></script>
+		<script src="assets/demo/datatables-demo.js"></script>
     </body>
+    
 </html>
+

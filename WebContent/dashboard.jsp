@@ -15,6 +15,8 @@
         <title>Dash Board</title>
         <script src="js/Chart.min.js"></script>
          <link rel="stylesheet" href="css/bootstrap.min.css">
+         <link rel="stylesheet" href="css/stylemenubar.css">
+         <link rel="stylesheet" href="css/style4.css">
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/popper.min.js"></script>
@@ -46,568 +48,136 @@
 		 	font-size: 14px;
 		}
 		
-	</style>    
-    <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
-   
-    <body>
-    	<div class="container-sm" align="center">
-   			<!--  <label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 20px;"> DASH BOARD </label> --><br><br>
-        </div>
-        
-               
-        <div class="row">
-        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<div class="col">
-        			<div id="rcorners1">
-        			
-        			<table>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<img src="images/student.svg"  height="20" width="20"/>
-        						<label id="labelname">Total Students </label>
-        						<br>		
-        						<img src="images/teacher.svg" height="20" width="20"/>
-        						<label id="labelname">Total Teachers </label>
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<label id="labelnumber">${totalstudents}</label><br>
-        						<label id="labelnumber">${totalteachers}</label>	
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	<div class="col"> 
-        			<div id="rcorners1">
-        			<table>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<img src="images/totalfees.svg" height="20" width="20"/>
-        						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="images/monthlyfees.svg"  height="20" width="20"/>	
-        						<label id="labelname">${Currentmonth} Fees</label>
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<label id="labelnumber">${totalFeesAmountDashBoard}</label><br>
-        						<label id="labelnumber">${sumOfFeesMonthly}</label>	
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	
-        	
-        	<div class="col">
-        		<div id="rcorners1">
-        			<table>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        					<img src="images/feespaid.svg" height="20" width="20"/>	
-        						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="images/feesdue.svg"  height="20" width="20"/>
-        						<label id="labelname">Total Fees Due&nbsp;</label>
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<label id="labelnumber">${totalPaidAmountDashBoard}</label><br>
-        						<label id="labelnumber">${totalDueAmountDashBoard}</label>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	
-        	 </div>
-        	 
-        	 <div class="col">
-        		<div id="rcorners1">
-        			<table>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<img src="images/todayscollection.svg" height="20" width="20"/>
-        						<label id="labelname">Today's Fees</label>
-        						<br>		
-        						<img src="images/todaysexpenses.svg" height="20" width="20"/>	
-        						<label id="labelname">Today's Expenses</label>	
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<label id="labelnumber">${sumOfFeesDaily}</label><br>
-        						<label id="labelnumber">${dailyexpenses}</label>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	
-        	 </div>
-        	 
-        </div>
-        
-             <div><br><br></div>
-             
-             <div class="row">
-             	
-             	<div class="col">
-             		<canvas id="student-monthlyfeeschart" height="200"></canvas>
-             	</div>
-             	
-            	<div class="col">
-            		<canvas id="student-expensechart" height="200"></canvas>
-            	</div>	
-             </div>
-             
-             <div class="row">
-             	
-             	<div class="col">
-             		<canvas id="student-chart" height="200"></canvas>
-             	</div>
-             	
-            	<div class="col" align="center">
-            		<canvas id="student-male-female" height="300"></canvas>
-            	</div>	
-             </div>
-			
-			
-			
 		
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 
-   		<form id="form1" method="post">
-				<label id="classesstudying" style="display: none;">${studentxaxis}</label>
-				<label id="students" style="display: none;">${studentyaxis}</label>
-				<label id = "studentsfees" style="display: none;">${studenttotalfees}</label>
-				<label id = "currentdate" style="display: none;">${currentdate}</label>
-				<label id = "monthlystudentsfees" style="display: none;">${monthlystudentsfees}</label>
-				<label id = "monthlist" style="display: none;">${monthlist}</label>
-				<label id = "monthlytotalexpenses" style="display: none;">${monthlyexpenses}</label>
-				<label id = "monthlisttotalexpenses" style="display: none;">${monthlistexpenses}</label>
-				<label id = "totalboysgirls" style="display: none;">${totalboysgirls}</label>
-        </form>
-	     
-	     
-	     
-	     
+
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 70px;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-top: 90px;
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+		
+	</style>    
+    
+    <body>
+    <div id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>
+
+
+<div class="sidenav">
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#clients">Clients</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<div class="main">
+  <h2>Sidebar</h2>
+  <p>This sidebar is of full height (100%) and always shown.</p>
+  <p>Scroll down the page to see the result.</p>
+  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+</div>
+
+
+
+
+  
 	     <script>
-        	var totalclasses = document.getElementById("classesstudying").innerHTML;
-        	var classlabel = JSON.parse(totalclasses);
-        	
-        	var totalStudents = document.getElementById("students").innerHTML;
-        	var studentslabel = JSON.parse(totalStudents);
-        	
-        	 var newarr=GetMax(studentslabel);
-        		var roundedno = newarr % 100;
-        		var finalstep = (100 -roundedno) + parseInt(newarr);
-   
-        		function GetMax(arr)
-        		{   var MaxX=arr[0];
-
-        		    for (var X=0;X<arr.length;X++)
-        		        if (MaxX<arr[X])
-        		            MaxX=arr[X];
-
-        		    return MaxX;
-        		}
-        	
-            new Chart(document.getElementById("student-chart"), {
-                type: 'bar',
-                data: {
-                  labels: classlabel,
-                  datasets: [
-                    {
-                      label: "Total Students",
-                      backgroundColor: [
-        	                'rgba(54, 162, 235, 0.2)',
-        	                'rgba(30, 26, 86, 0.2)',
-        	                'rgba(75, 202, 48, 0.2)',
-        	                'rgba(153, 102, 255, 0.2)',
-        	                'rgba(86, 59, 64, 0.2)',
-        	                'rgba(60, 39, 132, 0.2)',
-        	                'rgba(54, 162, 235, 0.2)',
-        	                'rgba(30, 26, 86, 0.2)',
-        	                'rgba(75, 202, 48, 0.2)',
-        	                'rgba(153, 102, 255, 0.2)',
-        	                'rgba(86, 59, 64, 0.2)',
-        	                'rgba(60, 39, 132, 0.2)',
-        	                'rgba(54, 162, 235, 0.2)',
-        	                'rgba(30, 26, 86, 0.2)',
-        	                'rgba(75, 202, 48, 0.2)',
-        	                'rgba(153, 102, 255, 0.2)',
-        	                'rgba(86, 59, 64, 0.2)',
-        	                'rgba(60, 39, 132, 0.2)',
-        	                'rgba(54, 162, 235, 0.2)',
-        	                'rgba(30, 26, 86, 0.2)',
-        	                'rgba(75, 202, 48, 0.2)',
-        	                'rgba(153, 102, 255, 0.2)',
-        	                'rgba(86, 59, 64, 0.2)'
-        	            ],
-        	            borderColor: [
-          	                'rgba(200,99,132,1)',
-          	                'rgba(54, 162, 235, 1)',
-          	                'rgba(220, 206, 86, 1)',
-          	                'rgba(75, 192, 192, 1)',
-          	                'rgba(153, 102, 255, 1)',
-          	                'rgba(290, 159, 64, 1)',
-          	              	'rgba(200,99,132,1)',
-        	                'rgba(54, 162, 235, 1)',
-        	                'rgba(220, 206, 86, 1)',
-        	                'rgba(75, 192, 192, 1)',
-        	                'rgba(153, 102, 255, 1)',
-        	                'rgba(290, 159, 64, 1)',
-        	                'rgba(200,99,132,1)',
-          	                'rgba(54, 162, 235, 1)',
-          	                'rgba(220, 206, 86, 1)',
-          	                'rgba(75, 192, 192, 1)',
-          	                'rgba(153, 102, 255, 1)',
-          	                'rgba(290, 159, 64, 1)',
-          	              	'rgba(200,99,132,1)',
-        	                'rgba(54, 162, 235, 1)',
-        	                'rgba(220, 206, 86, 1)',
-        	                'rgba(75, 192, 192, 1)',
-        	                'rgba(153, 102, 255, 1)',
-        	                'rgba(290, 159, 64, 1)'
-          	            ],
-      	            maintainAspectRatio: false,
-      	            borderWidth: 1,
-                      data: studentslabel
-                    }
-                  ]
-                },
-                options: {
-                  responsive: true,
-                  legend: { display: false },
-                  
-                  "hover": {
-                      "animationDuration": 0
-                    },
-                     "animation": {
-                        "duration": 1,
-                      "onComplete": function() {
-                        var chartInstance = this.chart,
-                          ctx = chartInstance.ctx;
-         
-                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-         
-                        this.data.datasets.forEach(function(dataset, i) {
-                          var meta = chartInstance.controller.getDatasetMeta(i);
-                          meta.data.forEach(function(bar, index) {
-                            var data = dataset.data[index];
-                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                          });
-                        });
-                      }
-                    },
-                    
-                  title: {
-                    display: true,
-                    text: 'Number of Students Per Class'
-                  },
-                   scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                max: finalstep+20,
-                                stepSize: 20,
-                                fontColor: "Black"
-                               }
-                        
-                            }], xAxes: [{
-                                ticks: {
-                                    fontColor: "Black"
-                                }
-                            }]
-                }
-                } 
-            });
-            
-          		//Bar Chart for Daily Expense
-        	var totalExpenses = document.getElementById("monthlytotalexpenses").innerHTML;
-        	var expenselabel = JSON.parse(totalExpenses);
-        	
-      	 	var currdate = document.getElementById("monthlisttotalexpenses").innerHTML;
-      		var dateslabel = JSON.parse(currdate);
-        	
-            new Chart(document.getElementById("student-expensechart"), {
-                type: 'bar',
-                data: {
-                  labels: dateslabel,
-                  datasets: [
-                    {
-                      backgroundColor: [
-                    	'rgba(54, 162, 235, 0.2)',
-      	                'rgba(30, 26, 86, 0.2)',
-      	                'rgba(75, 202, 48, 0.2)',
-      	                'rgba(153, 102, 255, 0.2)',
-      	                'rgba(86, 59, 64, 0.2)',
-      	                'rgba(60, 39, 132, 0.2)',
-      	                'rgba(54, 162, 235, 0.2)',
-      	                'rgba(30, 26, 86, 0.2)',
-      	                'rgba(75, 202, 48, 0.2)',
-      	                'rgba(153, 102, 255, 0.2)',
-      	                'rgba(86, 59, 64, 0.2)',
-      	                'rgba(60, 39, 132, 0.2)',
-      	                'rgba(54, 162, 235, 0.2)',
-      	                'rgba(30, 26, 86, 0.2)',
-      	                'rgba(75, 202, 48, 0.2)',
-      	                'rgba(153, 102, 255, 0.2)'
-      	            ],
-      	            borderColor: [
-      	            	'rgba(200,99,132,1)',
-      	                'rgba(54, 162, 235, 1)',
-      	                'rgba(220, 206, 86, 1)',
-      	                'rgba(75, 192, 192, 1)',
-      	                'rgba(153, 102, 255, 1)',
-      	                'rgba(290, 159, 64, 1)',
-      	              	'rgba(200,99,132,1)',
-    	                'rgba(54, 162, 235, 1)',
-    	                'rgba(220, 206, 86, 1)',
-    	                'rgba(75, 192, 192, 1)',
-    	                'rgba(153, 102, 255, 1)',
-    	                'rgba(290, 159, 64, 1)',
-    	                'rgba(200,99,132,1)',
-      	                'rgba(54, 162, 235, 1)',
-      	                'rgba(220, 206, 86, 1)',
-      	                'rgba(75, 192, 192, 1)',
-      	                'rgba(153, 102, 255, 1)'
-      	            ],
-      	            maintainAspectRatio: false,
-      	            borderWidth: 1,
-                      data: expenselabel
-                    }
-                  ]
-                },
-                options: {
-                  legend: { display: false },
-                  
-                  
-                  "hover": {
-                      "animationDuration": 0
-                    },
-                     "animation": {
-                        "duration": 1,
-                      "onComplete": function() {
-                        var chartInstance = this.chart,
-                          ctx = chartInstance.ctx;
-         
-                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-         
-                        this.data.datasets.forEach(function(dataset, i) {
-                          var meta = chartInstance.controller.getDatasetMeta(i);
-                          meta.data.forEach(function(bar, index) {
-                            var data = dataset.data[index];
-                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                          });
-                        });
-                      }
-                    },
-                    
-                  title: {
-                    display: true,
-                    text: 'Monthly Expenses'
-                  } ,
-                   scales: {
-                	   yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                max: 20000,
-                                stepSize: 2000
-                               }
-                        
-                            }]
-                } 
-                } 
-            });
-            
-            
-          //Bar Chart for Monthly fees
-        	var monthlyfees = document.getElementById("monthlystudentsfees").innerHTML;
-        	var monthlyfeeslabel = JSON.parse(monthlyfees);
-        	
-      	 	var monthlist = document.getElementById("monthlist").innerHTML;
-      		var monthlistlabel = JSON.parse(monthlist);
-        	
-            new Chart(document.getElementById("student-monthlyfeeschart"), {
-                type: 'bar',
-                data: {
-                  labels: monthlistlabel,
-                  datasets: [
-                    {
-                      backgroundColor: [
-                    	  'rgba(54, 162, 235, 0.2)',
-      	                'rgba(30, 26, 86, 0.2)',
-      	                'rgba(75, 202, 48, 0.2)',
-      	                'rgba(153, 102, 255, 0.2)',
-      	                'rgba(86, 59, 64, 0.2)',
-      	                'rgba(60, 39, 132, 0.2)',
-      	                'rgba(54, 162, 235, 0.2)',
-      	                'rgba(30, 26, 86, 0.2)',
-      	                'rgba(75, 202, 48, 0.2)',
-      	                'rgba(153, 102, 255, 0.2)',
-      	                'rgba(86, 59, 64, 0.2)',
-      	                'rgba(60, 39, 132, 0.2)',
-      	                'rgba(54, 162, 235, 0.2)',
-      	                'rgba(30, 26, 86, 0.2)',
-      	                'rgba(75, 202, 48, 0.2)',
-      	                'rgba(153, 102, 255, 0.2)'
-      	            ],
-      	            borderColor: [
-      	            	'rgba(200,99,132,1)',
-      	                'rgba(54, 162, 235, 1)',
-      	                'rgba(220, 206, 86, 1)',
-      	                'rgba(75, 192, 192, 1)',
-      	                'rgba(153, 102, 255, 1)',
-      	                'rgba(290, 159, 64, 1)',
-      	              	'rgba(200,99,132,1)',
-    	                'rgba(54, 162, 235, 1)',
-    	                'rgba(220, 206, 86, 1)',
-    	                'rgba(75, 192, 192, 1)',
-    	                'rgba(153, 102, 255, 1)',
-    	                'rgba(290, 159, 64, 1)',
-    	                'rgba(200,99,132,1)',
-      	                'rgba(54, 162, 235, 1)',
-      	                'rgba(220, 206, 86, 1)',
-      	                'rgba(75, 192, 192, 1)',
-      	                'rgba(153, 102, 255, 1)'
-      	            ],
-      	            maintainAspectRatio: false,
-      	            borderWidth: 1,
-                      data: monthlyfeeslabel
-                    }
-                  ]
-                },
-                options: {
-                  legend: { display: false },
-                  
-                  
-                  "hover": {
-                      "animationDuration": 0
-                    },
-                     "animation": {
-                        "duration": 1,
-                      "onComplete": function() {
-                        var chartInstance = this.chart,
-                          ctx = chartInstance.ctx;
-         
-                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-         
-                        this.data.datasets.forEach(function(dataset, i) {
-                          var meta = chartInstance.controller.getDatasetMeta(i);
-                          meta.data.forEach(function(bar, index) {
-                            var data = dataset.data[index];
-                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                          });
-                        });
-                      }
-                    },
-                    
-                  title: {
-                    display: true,
-                    text: 'Monthly Fees Collection'
-                  } ,
-                   scales: {
-                	   yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                max: 25000,
-                                stepSize: 5000
-                               }
-                        
-                            }]
-                } 
-                } 
-            });
-            
-            //Boys & Girls
-            
-            var boysgirls = document.getElementById("totalboysgirls").innerHTML;
-        	var boysGirlsGraph = JSON.parse(boysgirls);
-            
-            var ctx = document.getElementById("student-male-female");
-            var myChart = new Chart(ctx, {
-              type: 'pie',
-              data: {
-                labels: ['Boys', 'Girls'],
-                datasets: [{
-                  data: boysGirlsGraph,
-                  backgroundColor: [
-                	  'rgba(54, 162, 235, 0.2)',
-                	  'rgba(255, 99, 132, 0.5)'
-                    
-                  ],
-                  borderColor: [
-                	  'rgba(54, 162, 235, 1)',
-                	  'rgba(255,99,132,1)'
-                    
-                  ],
-                  borderWidth: 1
-                }]
-              },
-              options: {
-               	//cutoutPercentage: 80,
-                responsive: false,
-                
-                title: {
-                    display: true,
-                    text: 'Total Boys & Girls',
-                    position: 'top'
-                  },
-                  rotation: -0.7 * Math.PI,
-                  legend: {
-                	    display: true
-                	  }
-
-              }
-            });
-     
-            
-	</script> 
-</body>    
+			window.onscroll = function() {myFunction()};
+			
+			var navbar = document.getElementById("navbar");
+			var sticky = navbar.offsetTop;
+			
+			function myFunction() {
+			  if (window.pageYOffset >= sticky) {
+			    navbar.classList.add("sticky")
+			  } else {
+			    navbar.classList.remove("sticky");
+			  }
+			}	
+	</script>
+	
+		
+		
+	</body>    
 </html>

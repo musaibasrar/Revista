@@ -9,11 +9,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  *
- * @author Musaib
+ * @author Mayur
  */
 public class DateUtil {
 
@@ -63,10 +62,9 @@ public class DateUtil {
      * @param source
      * @return
      */
-    public static Date simpleDateParser(String stringDate) {/*
+    public static Date simpleDateParser(String source) {
         //simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        // DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd"); original
-    	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         try {
             returnDate = formatter.parse(source);
             System.out.println("the date in the dateutil is "+returnDate);
@@ -78,70 +76,8 @@ public class DateUtil {
             return returnDate;
         }
 
-    */
-
-
-		Date datefinal = null;
-		try {
-			Date date = null;
-
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
-					Locale.ENGLISH);
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
-
-			date = (Date) formatter.parse(stringDate);
-			String secdate = df.format(date);
-
-			datefinal = (Date) dateformatter.parse(secdate);
-
-		} catch (ParseException e) {
-
-			System.out.println("Exception :" + e);
-
-		}
-		return datefinal;
-    
     }
 
-    
-    public static Date datePars(String stringDate) {
-    	
-		Date datefinal = null;
-		try {
-			Date date = null;
-
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
-
-			date = (Date) formatter.parse(stringDate);
-			String secdate = df.format(date);
-
-			datefinal = (Date) dateformatter.parse(secdate);
-
-		} catch (ParseException e) {
-
-			Date datefinal1 = null;
-			try {
-				Date date = null;
-
-				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
-						Locale.ENGLISH);
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-				SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
-
-				date = (Date) formatter.parse(stringDate);
-				String secdate = df.format(date);
-
-				datefinal1 = (Date) dateformatter.parse(secdate);
-				datefinal = datefinal1;
-			} catch (ParseException e1) {
-				System.out.println("Exception :" + e1);
-			}
-		}
-		return datefinal;
-    }
     /**
      *
      * @param source
@@ -310,135 +246,4 @@ public class DateUtil {
         }
 
     }
-    
-public static Date dateParserUpdateStd(String stringDate) {
-    	
-		Date datefinal = null;
-		try {
-			Date date = null;
-
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",
-					Locale.ENGLISH);
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
-
-			date = (Date) formatter.parse(stringDate);
-			String secdate = df.format(date);
-
-			datefinal = (Date) dateformatter.parse(secdate);
-
-		} catch (ParseException e) {
-				e.printStackTrace();
-		
-		}
-
-		return datefinal;
-    }
-
-
-public static Date dateParserdd(String stringDate) {
-	
-	Date datefinal = null;
-	try {
-		Date date = null;
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",
-				Locale.ENGLISH);
-
-		date = (Date) formatter.parse(stringDate);
-		String secdate = formatter.format(date);
-
-		datefinal = (Date) formatter.parse(secdate);
-
-	} catch (ParseException e) {
-			e.printStackTrace();
-	}
-	return datefinal;
-}
-
-public static Date dateParserddmmyyyy(String stringDate) {
-	
-	Date datefinal = null;
-	try {
-		Date date = null;
-
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy",
-				Locale.ENGLISH);
-		SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
-
-		date = (Date) formatter.parse(stringDate);
-		String secdate = dateformatter.format(date);
-
-		datefinal = (Date) dateformatter.parse(secdate);
-
-	} catch (ParseException e) {
-			e.printStackTrace();
-	
-	}
-
-	return datefinal;
-}
-
-public static String getStringDate(Date dateofbirth) {
-	
-	String date = null;
-	
-	if(dateofbirth!=null) {
-		date = dateofbirth.toString();
-	}
-	
-	return date;
-	}
-
-public static String dateParserddMMYYYY(Date date) {
-	
-	String datefinal = null;
-	try {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
-				Locale.ENGLISH);
-		datefinal = formatter.format(date);
-
-	} catch (Exception e) {
-			e.printStackTrace();
-	}
-	return datefinal;
-}
-
-public static String dateParseryyyymmdd(Date date) {
-	
-	String datefinal = null;
-	try {
-		SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
-
-		datefinal = dateformatter.format(date);
-		System.out.println("datefinal "+datefinal);
-	} catch (Exception e) {
-			e.printStackTrace();
-	}
-	return datefinal;
-}
-
-public static Date indiandateParser(String stringDate) {
-	
-	Date datefinal = null;
-	try {
-		Date date = null;
-
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
-				Locale.ENGLISH);
-		SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
-
-		date = (Date) formatter.parse(stringDate);
-		String secdate = dateformatter.format(date);
-
-		datefinal = (Date) dateformatter.parse(secdate);
-
-	} catch (ParseException e) {
-			e.printStackTrace();
-	
-	}
-
-	return datefinal;
-}
-
 }

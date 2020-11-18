@@ -1,7 +1,7 @@
 <%-- 
     Document   : notSaved
     Created on : Jan 5, 2012, 1:11:53 PM
-    Author     : Musaib
+    Author     : Mayur
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -65,34 +65,12 @@
             });
 
             function Backup() {
-            	
-            	if(document.getElementById("filename").value != ""){
-            		var form1 = document.getElementById("form1");
-                    form1.action = "Controller?process=UserProcess&action=backup";
-                    form1.submit();	
-            	}else{
-            		alert('Enter the file name');
-            	}
-                
+                var form1 = document.getElementById("form1");
+                form1.action = "Controller?process=PersonalProcess&action=backup";
+                form1.submit();
             }
         </script>
     </head>
-    <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
     <body background="images/bg.jpg" >
         <form id="form1" method="post">
 
@@ -106,7 +84,7 @@ for(Cookie cookie : cookies){
 
                             <label>
 
-                                <input name="filename" type="text" class="textField"  id="filename" required size="36"  >
+                                <input name="filename" type="text" class="textField" id="filename" size="36"  >
 
                             </label>
 
@@ -119,7 +97,7 @@ for(Cookie cookie : cookies){
                         <p class="style1">
 
                             <input type="button" id="view" value="Backup" onClick="Backup()">&nbsp;&nbsp;&nbsp;&nbsp;
-                            <!-- <input type="button" value="Restore" id="addnew" > -->
+                            <input type="button" value="Restore" id="addnew" >
                         </p></td>
                 </tr>
             </table>

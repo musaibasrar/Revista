@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Saved
+    Document   : notSaved
     Created on : Jan 5, 2012, 1:11:53 PM
-    Author     : Musaib
+    Author     : Mayur
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Save success</title>
+        <title>Subscriber Saved</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -66,36 +66,20 @@
 
             function ViewAll(){
                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=StudentProcess&action=viewAll";
+                form1.action="Controller?process=PersonalProcess&action=viewAll";
                 form1.submit();
             }
         </script>
 </head>
-  <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
-    <body background="images/bg.jpg" >
-        <form id="form1" action=""  method="post">
+    <body>
+        <form id="form1"   method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Student Added Successfully</p>
+        <td height="250" align="center" valign="middle"><p class="style1"> Registration Successful</p>
         <p class="style1">
           
             <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <!-- <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addStudent.jsp';"> -->
+            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addContact.jsp';">
         </p></td>
       </tr>
     </table>

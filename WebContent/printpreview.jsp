@@ -1,359 +1,50 @@
 <%-- 
-    Document   : Print Preview
+    Document   : printpreview
     Created on : Jan 4, 2013, 4:39:24 PM
     Author     : Musaib
 --%>
 
-
-<%@page import="java.lang.String"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
+
+<html >
     <head >
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Please wait...</title> 
-
-        <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
-
-        <link rel="stylesheet" href="css/datePicker/demos.css">
-        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-
-        <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.trendline.min.js"></script>
-
-        <style type="text/css">
-            <!--
-            .dataTextInActive {
-                border-radius:1px;
-                font-family: Tahoma;
-                color: #4b6a84;
-                font-size: 12px;
-                font-weight: bold;
-                letter-spacing: normal;
-                text-align: left;
-                vertical-align: top;
-                text-decoration:none;
-            }
-            .headerText {
-                border-radius:3px;
-                font-family: Tahoma;
-                font-size: 12px;
-                background-color: #4b6a84;
-                color: #FFFFFF;
-                font-weight: normal;
-                width: auto ;
-                height: 22px;
-                vertical-align: middle;
-                text-align: center;
-                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
-            }
-            .headerTD{
-                background-color:#4b6a84;
-                color: #FFFFFF;
-                font-family: Tahoma;
-                font-size: 13px;
-                text-transform: uppercase;
-                text-align: center;
-                font-weight: bold;
-            }
-            .smallheaderTD{
-                color: #4b6a84;
-                font-family: Tahoma;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: left;
-                font-weight: bold;
-            }
-            .textFieldFixedWidth{
-                width: 57px;
-            }
-            .subHeaderTD{
-                color: #325F6D;
-                font-family: Tahoma;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: left;
-                font-weight: bold;
-            }
-            .divCSS{
-                overflow:  scroll;
-                height: 100%;
-                width: 100%;
-            }
-
-            .fiedlSet {
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-width: 1;
-                width: 100%;
-                color: #000000;
-                font-size: 16px;
-                font-weight: bold;
-                font-variant: normal;
-                font-stretch: wider;
-                background-color: #e2ebf3;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-            }
-            .legendCSS {
-                color: #666666;
-            }
-            .tableCSS {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0px;
-                top: 0px;
-            }
-            .textAreaCSS {
-                height: auto;
-                width: auto;
-            }
-            .textField {
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                width: auto;
-                height: auto;
-            }
-            .alignRight {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .alignLeft {
-                font-family: Tahoma;
-                font-size: 13px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: left;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .alignRightMultiple {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-weight: bolder;
-                text-align: right;
-                vertical-align: middle;
-                font-style: normal;
-                color: #325F6D;
-            }
-            .alignCentreMultiple {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bolder;
-                text-align: center;
-                vertical-align: middle;
-                font-style: normal;
-                color: #000000;
-            }
-            .autoAdjust {
-                height: auto;
-                width: auto;
-            }
-            .radioSpanCSS {
-                font-size: 12px;
-                font-family: Arial, Helvetica, sans-serif;
-                text-align: left;
-                vertical-align: middle;
-            }
-            .radioCSS {
-                background-position: left center;
-            }
-            .spanText {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bold;
-                color: #000000;
-            }
-            .emptyFieldSet {
-                border-top-color: #FA7676;
-                border-right-color: #FA7676;
-                border-bottom-color: #FA7676;
-                border-left-color: #FA7676;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-width: thin;
-                border-right-width: thin;
-                border-bottom-width: thin;
-                border-left-width: thin;
-                background-image: url(images/close.JPG);
-                background-repeat: repeat-y;
-                background-attachment: scroll;
-                background-position: right;
-                width: auto;
-                height: auto;
-                display: inline;
-            }
-            .style1 {
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style2 {
-                color: #666666;
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style4 {
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                vertical-align: middle;
-                color: #325f6d;
-            }
-            .tablerows{
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                font-weight: bold;
-
-            }
-            -->
-        </style>
-        <script type="text/javascript">
-
-            function updateContact() {
-                var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=PersonalProcess&action=updateContactDetails&id=1";
-                form1.submit();
-            }
-
-            function hideButton() {
-
-            }
-
-        </script>
+     <%
+            response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
+            response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
+            response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+        %>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Print Preview</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- <link href="css/bootstrap.min.css" rel="stylesheet"  />-->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet" /> 
+        <script src="js/all.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+      <!--  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script> -->
 
         <script type="text/javascript">
-            $(function() {
-
-                $("#accordion").accordion({
-                    collapsible: true,
-                    autoHeight: false});
-                /*$("#set")
-                 .button()
-                 .click(function() {
-                 updateVisit();
-                 });  */
-            });
-        </script>
-
-        <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                $('#myTable').dataTable({
-                    "sScrollY": "380px",
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": true,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bStateSave": false,
-                    "bProcessing": false,
-                    "bServerSide": false,
-                    "bAutoWidth": false,
-                    "iDisplayLength": 500,
-                    "aoColumnDefs": [
-                        {'bSortable': false, 'aTargets': [0]}
-                    ]
-
-                });
-            });
+            
+        	function getSubscriber() {
+				var form2 = document.getElementById("form2");
+				if(form2.checkValidity()) {
+					form2.subscribersearch.disabled = true;
+					form2.action = "Controller?process=PersonalProcess&action=getSubscribers";
+					form2.submit();
+				  }
+			}
+        	
         </script>
         
-        <script type="text/javascript">
-                                $(function() {
-                                    $("#print")
-                                            .button()
-
-
-                                });
-                            </script>
-
-    </head>
-      <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
-
-    <!-- <style type="text/css">
-         
-         @media print {
-     body { font-size: 25px }
-     .hide { visibility: hidden }
-       }
-       
-   @media screen {
-     body { font-size: 13px }
-   }
-   
-         
-         
-     </style> -->
-
-    <style type="text/css">
+        <style type="text/css">
 
         @media print {
             .fontsize { font-size: 15px ;
@@ -388,34 +79,163 @@ for(Cookie cookie : cookies){
                 margin-right: 0px;
             }
         }
-        .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 5.5cm;
-    height: 8.5cm;
-}
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-    padding: 2px 16px;
-}
     </style>
-
-
-    <body class="bodymargin">
-       
-        <form action="" method="post" id="form1" class="bodymargin">
+    
+    </head>
+    <%
+	//allow access only if session exists
+	String user = null;
+	if (session.getAttribute("userAuth") == null) {
+		response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	} else
+		user = (String) session.getAttribute("userAuth");
+	String userName = null;
+	String sessionID = null;
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("user"))
+				userName = cookie.getValue();
+			if (cookie.getName().equals("JSESSIONID"))
+				sessionID = cookie.getValue();
+		}
+	}
+%>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark border-bottom">
+            <a class="navbar-brand" href="#"><img src="images/schoolcarelogoheader.png" height="60" width="200"></a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id="form2" method="post">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="subscribersname" placeholder="Search for Subscribers..." aria-label="Search" aria-describedby="basic-addon2" required/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" name="subscribersearch" onclick="getSubscriber();"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <form id="form3" method="post">
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="Controller?process=UserProcess&action=logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            </form>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                        	<div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=dashBoard">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Subscribers</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                               		Paid Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAll">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriber">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expire">Expiring</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutscomp" aria-expanded="false" aria-controls="collapseLayoutscomp">
+                                <div class="sb-nav-link-icon"><i class="far fa-address-book"></i></div>
+                               		Comp. Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutscomp" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllComplementary">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriberComp">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expirecomp">Expiring</a>
+                                </nav>
+                            </div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutscredit" aria-expanded="false" aria-controls="collapseLayoutscredit">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               		Credit Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutscredit" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllCreditS">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriberCredit">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expirecredit">Expiring</a>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Addons</div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsprint" aria-expanded="false" aria-controls="collapseLayoutsprint">
+                                <div class="sb-nav-link-icon"><i class="fas fa-print"></i></div>
+                               		Print
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsprint" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=print">Paid Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=printCompl">Comp. Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=printCredit">Credit Subscribers</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsconfirmprint" aria-expanded="false" aria-controls="collapseLayoutsconfirmprint">
+                                <div class="sb-nav-link-icon"><i class="fas fa-paper-plane"></i></div>
+                               		Confirm Dispatch
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsconfirmprint" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintPaid">Paid Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintComp">Comp. Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintCredit">Credit Subscribers</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=advanceSearch">
+                                <div class="sb-nav-link-icon"><i class="fab fa-searchengin"></i></div>
+                                Advance Search
+                            </a>
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllArchive">
+                                <div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>
+                                Archive
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Executives</div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsexecutive" aria-expanded="false" aria-controls="collapseLayoutsexecutive">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
+                               		Executive
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsexecutive" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="addExecutive.jsp">Add New</a>
+                                    <a class="nav-link" href="Controller?process=ExecutiveProcess&action=viewAllExecutive">View All</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Start Bootstrap
+                    </div> -->
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                <form action="" method="post" id="form1" class="bodymargin">
 
            
             <div>
 
-
-
-                <table cellpadding="2"  border="0">
-
+                <table border="0">
                         <c:set var="iInitial" value="${iInitial}"/>
                         <c:set var="limit" value="1"/>
                         
@@ -426,43 +246,17 @@ for(Cookie cookie : cookies){
 
                         <tr>
                             <c:if test="${limit < iInitial}">
-                            <td class="fontsize" >
-                         <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div>
-                            
-                            
-                            </td>
-                            <td></td>
-                            <td></td>
+                            <td class="fontsize" ><textarea class="fontsize"  rows="10" cols="35">To,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out default="" value="${currentissue.currentissue}" />-<%= request.getSession().getAttribute("personaltoissueno"+i+"") %>/<%= request.getSession().getAttribute("personalpid"+i+"") %>&#13;&#10;<%= request.getSession().getAttribute("personalName" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("personaladdressline1" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("personalstate" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("pincode" + i + "")%></textarea> </td>
                             </c:if>
                             <c:set var="limit" value="${limit+1}"/>
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
-  								</div>
-						</div></td>
-						 <td></td>
-                            <td></td>
+                            <td  class="fontsize"><textarea class="fontsize"   rows="10" cols="35">To,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out default="" value="${currentissue.currentissue}" />-<%= request.getSession().getAttribute("personaltoissueno"+i+"") %>/<%= request.getSession().getAttribute("personalpid"+i+"") %>&#13;&#10;<%= request.getSession().getAttribute("personalName" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("personaladdressline1" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("personalstate" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("pincode" + i + "")%></textarea> </td>
                             </c:if>
                             <c:set var="limit" value="${limit+1}"/>
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div></td>
+                            <td  class="fontsize"><textarea class="fontsize"   rows="10" cols="35">To,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out default="" value="${currentissue.currentissue}" />-<%= request.getSession().getAttribute("personaltoissueno"+i+"") %>/<%= request.getSession().getAttribute("personalpid"+i+"") %>&#13;&#10;<%= request.getSession().getAttribute("personalName" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("personaladdressline1" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("personalstate" + i + "")%>&#13;&#10;<%= request.getSession().getAttribute("pincode" + i + "")%></textarea> </td>
                             </c:if>
                         </tr>
                         <% i = i + 1;%>
@@ -476,28 +270,111 @@ for(Cookie cookie : cookies){
 
                 <table  width="70%"  id="table11" align="left">
                     <tr>
-                        <td width="30%"> 
+                        	  <td width="30%"> 
 
-                        </td>
-                        <td>
-                            <button id="print" type="button" style="background-image: url(images/print.jpg);width: 63px;height: 60px" onclick="window.print();
-                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
-                        </td>
+                        	</td>
+                      		  <td>
+                      		  		<button id="print" type="submit"  onclick="window.print();
+                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide">
+                                    
+                                    <i class="fas fa-print"></i>&nbsp;Print
+                                    </button> 
+                      		     <!-- <button value="print" class="btn btn-success hide-me" onclick="window.print();this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide" type="submit" id="print"><i class="fas fa-print"></i>&nbsp;Print</button> --> 
+                  		      </td>
 
-                    </tr>
+                		    </tr>
 
-                </table>
+             			   </table>
 
+			            </div>
+       				 </form>
+                    
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted"></div>
+                            <div>
+                                <p>Powered By <a href="www.ideoholic.com">IDEOHOLIC</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
-
-
-
-
-
-
-
-
-
-        </form>
+        </div>
+        
+         <script src="js/jquery-3.5.1.slim.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/dataTable/jquery.dataTables.min.js"></script>
+		<script src="js/dataTables.bootstrap4.min.js" ></script>
+		<script src="assets/demo/datatables-demo.js"></script>
+        
+        <script>
+			    $(function(){
+			
+			        //button select all or cancel
+			        $("#select-all").click(function () {
+			            var all = $("input.select-all")[0];
+			            all.checked = !all.checked
+			            var checked = all.checked;
+			            $("input.select-item").each(function (index,item) {
+			                item.checked = checked;
+			            });
+			        });
+			
+			        //button select invert
+			        $("#select-invert").click(function () {
+			            $("input.select-item").each(function (index,item) {
+			                item.checked = !item.checked;
+			            });
+			            checkSelected();
+			        });
+			
+			        //button get selected info
+			        $("#selected").click(function () {
+			            var items=[];
+			            $("input.select-item:checked:checked").each(function (index,item) {
+			                items[index] = item.value;
+			            });
+			            if (items.length < 1) {
+			                alert("no selected items!!!");
+			            }else {
+			                var values = items.join(',');
+			                console.log(values);
+			                var html = $("<div></div>");
+			                html.html("selected:"+values);
+			                html.appendTo("body");
+			            }
+			        });
+			
+			        //column checkbox select all or cancel
+			        $("input.select-all").click(function () {
+			            var checked = this.checked;
+			            $("input.select-item").each(function (index,item) {
+			                item.checked = checked;
+			            });
+			        });
+			
+			        //check selected items
+			        $("input.select-item").click(function () {
+			            var checked = this.checked;
+			            console.log(checked);
+			            checkSelected();
+			        });
+			
+			        //check is all selected
+			        function checkSelected() {
+			            var all = $("input.select-all")[0];
+			            var total = $("input.select-item").length;
+			            var len = $("input.select-item:checked:checked").length;
+			            console.log("total:"+total);
+			            console.log("len:"+len);
+			            all.checked = len===total;
+			        }
+			    });
+		</script>
     </body>
+    
 </html>
+
