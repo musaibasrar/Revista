@@ -36,7 +36,6 @@ public class CurrentIssueAction {
 
     private String addIssue() {
         new CurrentIssueService(request, response).add();
-        System.out.println("IN action's CurrentIssueService");
         return "currentIssueSuccess.jsp";
     }
 

@@ -171,6 +171,18 @@
                                     <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintCredit">Credit Subscribers</a>
                                 </nav>
                             </div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsextras" aria-expanded="false" aria-controls="collapseLayoutsextras">
+                                <div class="sb-nav-link-icon"><i class="fab fa-affiliatetheme"></i></div>
+                               		Extras
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsextras" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Backup&Restore.jsp">Backup</a>
+                                    <a class="nav-link" href="currentIssue.jsp">Current Issue</a>
+                                    <a class="nav-link" href="changePassword.jsp">Change Password</a>
+                                </nav>
+                            </div>
                             <a class="nav-link" href="Controller?process=PersonalProcess&action=advanceSearch">
                                 <div class="sb-nav-link-icon"><i class="fab fa-searchengin"></i></div>
                                 Advance Search

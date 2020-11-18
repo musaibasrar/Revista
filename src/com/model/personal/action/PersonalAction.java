@@ -444,10 +444,9 @@ public class PersonalAction {
        
         String fileName = request.getParameter("filename");
        if(new PersonalService(request, response).backupData(fileName)){ 
-       
-        return"BackupSuccess.jsp";
+    	   	return"BackupSuccess.jsp";
        }else{
-           return"BackupFailed.jsp";
+           	return"BackupFailed.jsp";
        }
     }
 

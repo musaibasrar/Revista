@@ -51,6 +51,13 @@ public class UserService {
             httpSession.setAttribute("executive",login.getUsertype());
             httpSession.setAttribute("userAuth", login.getUsertype());
             //new NationalityService(request, response).setSessionAtrributes();
+            
+          //setting session to expiry in 60 mins
+           	httpSession.setMaxInactiveInterval(60*60);
+    		Cookie cookie = new Cookie("user",  login.getUsertype());
+    		cookie.setMaxAge(30*60);
+    		response.addCookie(cookie);
+    		
             result = true;
         } else {
             System.out.println("In userservice the login is null");
@@ -58,11 +65,7 @@ public class UserService {
             result = false;
             
         }
-      //setting session to expiry in 60 mins
-       	httpSession.setMaxInactiveInterval(60*60);
-		Cookie cookie = new Cookie("user",  login.getUsertype());
-		cookie.setMaxAge(30*60);
-		response.addCookie(cookie);
+      
 		
         return result;
     }

@@ -14,7 +14,7 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/stylelogin.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/openWindow.js"></script>
         <style type="text/css">
             <!--
@@ -61,7 +61,7 @@
     <!-- header ends -->
     
     <div id="login_body">
-    		 <div align="center"><h4 style="color: red">Please Enter Correct Username & Password</h4></div> 
+    		 <div align="center"><h6 style="color: red">Please Enter Correct Username & Password</h6></div> 
     	<div class="login_bg_wrper">
         	<div class="login_wraper">
                     <form action="Controller?process=UserProcess&action=authenticateUser" method="post">

@@ -1,291 +1,50 @@
 <%-- 
-    Document   : addcontact
-    Created on : Jun 17, 2013, 4:17:40 PM
-    Author     : CPEDUR1P5
+    Document   : ChangePassword
+    Created on : Dec 29, 2012, 1:57:17 PM
+    Author     : Musaib
 --%>
 
-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession" %>
-
-<%@page import="java.util.*" %>
-
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Advance Search for print</title>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<html >
+    <head >
+     <%
+            response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
+            response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
+            response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+        %>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Change Password</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- <link href="css/bootstrap.min.css" rel="stylesheet"  />-->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet" /> 
+        <script src="js/all.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+      <!--  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script> -->
 
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="js/datePicker/jquery-1.7.1.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.tabs.js"></script>
-        <script src="js/datePicker/ui/sliderAccess.js"></script>
-        <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script src="js/validation/jquery.ketchup.all.min.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.button.js"></script>
-        <link rel="stylesheet" href="css/datePicker/demos.css">
-
-
-
-
-
-        <style type="text/css">
-
-            .headerSearch{
-                font-size: 18px;
-                font-weight: bold;
-
-            }
-
-            .myclass{
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                width: auto;
-                height: auto;
-                color: black;
-                text-transform:capitalize;
-            }
-            <!--
-            .divCSS{
-                overflow:  scroll;
-                height: 100%;
-                width: 100%;
-            }
-
-            .fiedlSet {
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-width: 1;
-                width: 100%;
-                color: #000000;
-                font-size: 16px;
-                font-weight: bold;
-                font-variant: normal;
-                font-stretch: wider;
-                background-color: #e2ebf3;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-            }
-            .legendCSS {
-                color: #666666;
-            }
-            .tableCSS {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0px;
-                top: 0px;
-            }
-            .textAreaCSS {
-                height: auto;
-                width: auto;
-            }
-            .textField {
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-
-
-            }
-            .alignRight {
-                font-family: Tahoma;
-                font-size: 12px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-
-            .alignRightHead {
-                font-family: Tahoma;
-                font-size: 12px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-
-
-                font-weight: bold;
-            }
-
-
-
-            .alignRightMultiple {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-weight: bolder;
-                text-align: right;
-                vertical-align: middle;
-                font-style: normal;
-                color: #325F6D;
-            }
-            .alignCentreMultiple {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bolder;
-                text-align: center;
-                vertical-align: middle;
-                font-style: normal;
-                color: #000000;
-            }
-            .autoAdjust {
-                height: auto;
-                width: auto;
-            }
-            .radioSpanCSS {
-                font-size: 12px;
-                font-family: Arial, Helvetica, sans-serif;
-                text-align: left;
-                vertical-align: middle;
-            }
-            .radioCSS {
-                background-position: left center;
-            }
-            .spanText {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bold;
-                color: #000000;
-            }
-            .emptyFieldSet {
-                border-top-color: #FA7676;
-                border-right-color: #FA7676;
-                border-bottom-color: #FA7676;
-                border-left-color: #FA7676;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-width: thin;
-                border-right-width: thin;
-                border-bottom-width: thin;
-                border-left-width: thin;
-                background-image: url(images/close.JPG);
-                background-repeat: repeat-y;
-                background-attachment: scroll;
-                background-position: right;
-                width: auto;
-                height: auto;
-                display: inline;
-            }
-            .style1 {
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style2 {
-                color: #666666;
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style4 {
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                vertical-align: middle;
-                color: #325f6d;
-            }
-
-
-
-            -->
-
-            .alignRight1 {
-                font-family: Tahoma;
-                font-size: 15px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .mandatoryClass {
-    font-family: Tahoma;
-    font-size: 11px;
-    color: red;
-    font-style: normal;
-    text-transform: capitalize;
-    
-    text-align: right;
-    vertical-align: middle;
-    font-weight: bold;
-}
-        </style>
-
-
-        <script type="text/javascript" src="js/datetimepicker_css.js"></script>
-        <script src="JavaScript/actb.js"></script>
-        <script src="JavaScript/common.js"></script>
-
-
-
-
-        <script>
-            $(function() {
-                $("#datepicker").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepicker").datepicker("option", "showAnim", $(this).val());
-                });
-                 $("#datepickercredits").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepickercredits").datepicker("option", "showAnim", $(this).val());
-                });
-                 $("#datepickercredittodate").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepickercredittodate").datepicker("option", "showAnim", $(this).val());
-                });
-                $("#datepickercompls").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepickercompls").datepicker("option", "showAnim", $(this).val());
-                });
-                 $("#datepickercomplstodate").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepickercomplstodate").datepicker("option", "showAnim", $(this).val());
-                });
-            });
-
+        <script type="text/javascript">
+        	
+        	function getSubscriber() {
+				var form2 = document.getElementById("form2");
+				if(form2.checkValidity()) {
+					form2.subscribersearch.disabled = true;
+					form2.action = "Controller?process=PersonalProcess&action=getSubscribers";
+					form2.submit();
+				  }
+			}
+        	
         </script>
-
-
-
+        
+        
         <script>
 
         function validatePassword()
@@ -295,93 +54,195 @@
                 {
                     document.getElementById("mandatory").style.display = "";
                     
-                    
                 }
-
-
             }
 
             
             function hide(){
-                
                 document.getElementById("mandatory").style.display = "none";
-                
             }
-
-
-
-        </script>
-
-
-
-        <script type="text/javascript">
-            $(function() {
-
-
-                $("#save")
-                        .button()
-                        .click(function() {
-                    changePassword();
-
-
-                });
-                
-
-                $("#cancel")
-                        .button()
-                        .click(function() {
-                    Cancel();
-
-
-                });
-            });
-
-
-        </script>
-        <script>
-            $(function() {
-                $("#tabs").tabs();
-
-            });
-        </script>
-
-        
-  
-
- 
-       
-    </head>
-    <body onload="hide()"><form id="form1"  method="post" >
             
 
-            <div >
-                <div id="tabs">
-                    <ul>
-                        <li><a href="#tabs-1">Change Password</a></li>
-                        
-                    </ul>
-
-
-
-                    <div id="tabs-1">
-                        <table width="100%" border="0" align="center"  id="table1">
-
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-
-
-
-
-
+        </script>
+        
+        
+    </head>
+    <%
+	//allow access only if session exists
+	String user = null;
+	if (session.getAttribute("userAuth") == null) {
+		response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	} else
+		user = (String) session.getAttribute("userAuth");
+	String userName = null;
+	String sessionID = null;
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("user"))
+				userName = cookie.getValue();
+			if (cookie.getName().equals("JSESSIONID"))
+				sessionID = cookie.getValue();
+		}
+	}
+%>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark border-bottom">
+            <a class="navbar-brand" href="#"><img src="images/schoolcarelogoheader.png" height="60" width="200"></a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id="form2" method="post">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="subscribersname" placeholder="Search for Subscribers..." aria-label="Search" aria-describedby="basic-addon2" required/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" name="subscribersearch" onclick="getSubscriber();"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <form id="form3" method="post">
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="Controller?process=UserProcess&action=logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            </form>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                        	<div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=dashBoard">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Subscribers</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                               		Paid Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAll">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriber">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expire">Expiring</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutscomp" aria-expanded="false" aria-controls="collapseLayoutscomp">
+                                <div class="sb-nav-link-icon"><i class="far fa-address-book"></i></div>
+                               		Comp. Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutscomp" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllComplementary">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriberComp">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expirecomp">Expiring</a>
+                                </nav>
+                            </div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutscredit" aria-expanded="false" aria-controls="collapseLayoutscredit">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                               		Credit Subscribers
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutscredit" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllCreditS">View All</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=addSubscriberCredit">Add New</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=expirecredit">Expiring</a>
+                                </nav>
+                            </div>
                             
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
+                            <div class="sb-sidenav-menu-heading">Addons</div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsprint" aria-expanded="false" aria-controls="collapseLayoutsprint">
+                                <div class="sb-nav-link-icon"><i class="fas fa-print"></i></div>
+                               		Print
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsprint" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=print">Paid Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=printCompl">Comp. Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=printCredit">Credit Subscribers</a>
+                                </nav>
+                            </div>
+                            
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsconfirmprint" aria-expanded="false" aria-controls="collapseLayoutsconfirmprint">
+                                <div class="sb-nav-link-icon"><i class="fas fa-paper-plane"></i></div>
+                               		Confirm Dispatch
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsconfirmprint" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintPaid">Paid Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintComp">Comp. Subscribers</a>
+                                    <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllconfirmPrintCredit">Credit Subscribers</a>
+                                </nav>
+                            </div>
+                            
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsextras" aria-expanded="false" aria-controls="collapseLayoutsextras">
+                                <div class="sb-nav-link-icon"><i class="fab fa-affiliatetheme"></i></div>
+                               		Extras
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsextras" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="Backup&Restore.jsp">Backup</a>
+                                    <a class="nav-link" href="currentIssue.jsp">Current Issue</a>
+                                    <a class="nav-link" href="changePassword.jsp">Change Password</a>
+                                </nav>
+                            </div>
+                            
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=advanceSearch">
+                                <div class="sb-nav-link-icon"><i class="fab fa-searchengin"></i></div>
+                                Advance Search
+                            </a>
+                            <a class="nav-link" href="Controller?process=PersonalProcess&action=viewAllArchive">
+                                <div class="sb-nav-link-icon"><i class="fas fa-archive"></i></div>
+                                Archive
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Executives</div>
+                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsexecutive" aria-expanded="false" aria-controls="collapseLayoutsexecutive">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
+                               		Executive
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsexecutive" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="addExecutive.jsp">Add New</a>
+                                    <a class="nav-link" href="Controller?process=ExecutiveProcess&action=viewAllExecutive">View All</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Start Bootstrap
+                    </div> -->
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                
+                	<form id="form1"  method="post" >
+                    <div class="container-fluid">
+                    	<br>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                Change Password
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                	<table width="80%" border="0" align="center">
 
                             <tr>
                                 <td>
@@ -389,14 +250,15 @@
                                 </td>
                             </tr>
 
+
                             <tr>
 
 
-                                <td width="16%"  class="alignRight" >
+                                <td style="text-align: right">
                                     
-                                    Current Password*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+                                    Current Password*:&nbsp;&nbsp;  </td>
 
-                                <td width="28%"  >
+                                <td>
                                     <label>
                                         <input name="currentpassword" type="password"  class="textField" id="currentpassword"  size="36"  >
                                     </label>
@@ -419,8 +281,8 @@
 
                             <tr>
 
-                                <td  class="alignRight" > 
-                                    New Password* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <td style="text-align: right"> 
+                                    New Password*:&nbsp;&nbsp;
                                 </td>
                                 <td  >
                                     <label>
@@ -446,8 +308,8 @@
                             <tr>
 
 
-                                <td width="16%"  class="alignRight" >
-                                    Confirm new password* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                <td style="text-align: right">
+                                    Confirm new password*:&nbsp;&nbsp;
 
                                 <td>
                                     <label>
@@ -463,23 +325,10 @@
                                     <br/>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-
-
-                            
-                            <tr id="mandatory">
+                                                        
+                            <tr id="mandatory" style="display: none;">
                                 
-                                <td width="16%"  class="mandatoryClass"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * All fields are mandatory</td>
+                                <td style="text-align: right;font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * All fields are mandatory</td>
                             </tr>
                             
                                 <table width="100%" >
@@ -492,116 +341,50 @@
                                     <tr>
                                         <td align="center">
 
-                                            <button id="save" onmouseover="validatePassword();" >Confirm</button>
-
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button id="cancel" >Cancel</button>
+                                            <button id="save" class="btn btn-success" onclick="changePassword();" onmouseover="validatePassword();" >Confirm</button>
 
                                         </td>
 
 
                                     </tr>
                                 </table>
-
+                                	
+                                </div>
                             </div>
-                            
-                         
-
-
-
-                            
-                            
+                        </div>
                     </div>
-                </div>
-
-
-        </form>
+                    </form>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted"></div>
+                            <div>
+                                <p>Powered By <a href="www.ideoholic.com">IDEOHOLIC</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        
+         <script src="js/jquery-3.5.1.slim.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/dataTable/jquery.dataTables.min.js"></script>
+		<script src="js/dataTables.bootstrap4.min.js" ></script>
+		<script src="assets/demo/datatables-demo.js"></script>
         <script type="text/javascript">
+        function changePassword() {
 
-            function changePassword() {
+            var form1 = document.getElementById("form1");
+            form1.action = "Controller?process=UserProcess&action=changePassword";
+            form1.submit();
 
-                var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=UserProcess&action=changePassword";
-                form1.submit();
-
-            }
-            
-            function searchBetweenDatesCreditS() {
-
-                var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=Search&action=searchbydatescredits";
-                form1.submit();
-
-            }
-            function searchBetweenDatesComplS() {
-
-                var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=Search&action=searchbydatescompls";
-                form1.submit();
-
-            }
-
-            function searchBetweenDates1() {
-                alert("In search between dates");
-                var fromdate = document.getElementById("datepicker");
-                var todate = document.getElementById("datepickertodate");
-                var fromDate = fromdate.options[fromdate.selectedIndex].text;
-                var toDate = todate.options[todate.selectedIndex].text;
-
-                if (fromDate === "") {
-                    document.getElementById("datepicker").style.display = "none";
-                    document.getElementById("datepickertodate").style.display = "none";
-
-                } else {
-                    alert("In else of search between dates")
-                    var form1 = document.getElementById("form1");
-
-                    form1.action = "Controller?process=Search&action=searchbydates";
-                    form1.submit();
-                }
-            }
-
-            function Cancel() {
-                var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=PersonalProcess&action=print";
-                form1.submit();
-            }
-
-            function validateEmptyField(elementName) {
-
-                var txtBox = document.getElementById(elementName);
-
-
-                if (txtBox.value == "") {
-
-                    txtBox.className = "emptyFieldSet";
-
-
-                }
-                else if (txtBox.value != "") {
-                    txtBox.className = "textField";
-
-                }
-
-
-            }
-            function notEmptyField(elementName) {
-                alert(elementName);
-                var txtBox = document.getElementById(elementName);
-                if (txtBox.value != "") {
-                    txtBox.className = "textField";
-
-                }
-                else if (txtBox.value == "") {
-                    txtBox.className = "emptyFieldSet";
-
-                }
-
-
-
-            }
+        }
+        
         </script>
     </body>
+    
 </html>
-
 

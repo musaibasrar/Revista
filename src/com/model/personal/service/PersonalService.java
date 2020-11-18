@@ -722,11 +722,11 @@ public class PersonalService {
         boolean result = false;
         try {
             Properties properties = new Properties();
-//            FileReader reader = new FileReader("Backuplocation.properties");
-//            properties.load(reader);
-//            String backupDirectory = properties.getProperty("backupdirectory");
-//            System.out.println("the backup directory is " + backupDirectory);
-            //InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+              // FileReader reader = new FileReader("Backuplocation.properties");
+             //  properties.load(reader);
+            //   String backupDirectory = properties.getProperty("backupdirectory");
+           //    System.out.println("the backup directory is " + backupDirectory);
+          //	 InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
 
             InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
             properties.load(inputStream);
@@ -741,7 +741,8 @@ public class PersonalService {
             System.out.println("the back up for  the backuplocation " + backupLocation);
             request.setAttribute("Backuplocation", backupLocation);
             Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + backupLocation);
-
+            
+            //Process runtimeProcess = Runtime.getRuntime().exec("/opt/software/mysql-5.6.40-linux-glibc2.12-x86_64/bin/mysqldump -uroot -pmysql --add-drop-database -B schoolcare -r " + "/home/mushy/" + "schoolcare" + ".sql");
 
             // call the mysqldump in terminal and execute it
 

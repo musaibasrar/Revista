@@ -37,7 +37,6 @@ public class CurrentIssueService {
          currentIssue.setPci(1);
          
        String issue= DataUtil.emptyString(request.getParameter("issue"));
-        System.out.println("The issue number is "+issue);
        
        if(!issue.equalsIgnoreCase("")){
            int issueNumber = Integer.parseInt(issue);
