@@ -48,6 +48,25 @@
                 form1.action="Controller?process=PersonalProcess&action=viewAll";
                 form1.submit();
             }
+            
+<script type="text/javascript">
+            
+        	function deleteRecords(){
+                var form1=document.getElementById("form1");
+                form1.submit();
+            }
+        	
+        	function getSubscriber() {
+				var form2 = document.getElementById("form2");
+				if(form2.checkValidity()) {
+					form2.subscribersearch.disabled = true;
+					form2.action = "Controller?process=PersonalProcess&action=getSubscribers";
+					form2.submit();
+				  }
+			}
+        	
+        	
+        </script>
         </script>
     </head>
     

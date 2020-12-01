@@ -560,9 +560,7 @@
 
 
                                 <td class="rowclass" >Postal Address &nbsp;</td>
-                                     <td><textarea name="addressline1" class="myclass" id="addressline1" cols="27" rows="2" maxlength="220" onclick="validateNameContact();">
-                                     ${personal.addressline1}
-                                     </textarea> 
+                                     <td><input type="text" size="26" name="addressline1" class="myclass" id="addressline1" value="${personal.addressline1}" onclick="validateNameContact();">
                                         <!-- <input name="addressline1" type="text" class="myclass" id="addressline1" size="36"  onclick="validateNameContact();" maxlength="60" > -->
                                 </td>
 

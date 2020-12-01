@@ -583,7 +583,7 @@
 
 
                                 <td class="rowclass" >Postal Address &nbsp;</td>
-                                     <td><textarea name="addressline1" class="myclass" id="addressline1" cols="27" rows="2" maxlength="220" onclick="validateNameContact();"></textarea> 
+                                     <td><input type="text"  name="addressline1" class="myclass" id="addressline1" size="26" onclick="validateNameContact();"> 
                                         <!-- <input name="addressline1" type="text" class="myclass" id="addressline1" size="36"  onclick="validateNameContact();" maxlength="60" > -->
                                 </td>
 

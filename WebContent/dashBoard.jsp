@@ -31,6 +31,20 @@
       <!--  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script> -->
 
+	<script type="text/javascript">
+        	
+        	function getSubscriber() {
+				var form2 = document.getElementById("form2");
+				if(form2.checkValidity()) {
+					form2.subscribersearch.disabled = true;
+					form2.action = "Controller?process=PersonalProcess&action=getSubscribers";
+					form2.submit();
+				  }
+			}
+        	
+        	
+        </script>
+        
        
     </head>
     <%

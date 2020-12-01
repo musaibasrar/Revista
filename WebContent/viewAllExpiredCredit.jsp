@@ -50,6 +50,19 @@
             });
 
         </script>
+        <script type="text/javascript">
+        	
+        	function getSubscriber() {
+				var form2 = document.getElementById("form2");
+				if(form2.checkValidity()) {
+					form2.subscribersearch.disabled = true;
+					form2.action = "Controller?process=PersonalProcess&action=getSubscribers";
+					form2.submit();
+				  }
+			}
+        	
+        	
+        </script>
     </head>
     <%
 	//allow access only if session exists

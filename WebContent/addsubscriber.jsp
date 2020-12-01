@@ -88,16 +88,16 @@
 
 
                 if (distlistitemtext == "1 year") {
-                    document.getElementById("noofissues").value = "12";
+                    document.getElementById("totalissues").value = "12";
                 } else if (distlistitemtext == "3 years") {
-                    document.getElementById("noofissues").value = "36";
+                    document.getElementById("totalissues").value = "36";
                 } 
 
             }
 
             function  calculateIssues() {
 
-                var totalissues = document.getElementById("noofissues").value;
+                var totalissues = document.getElementById("totalissues").value;
                 var fromissues = document.getElementById("fromkmissueno").value;
 
                 var toissues = parseInt(totalissues, 10) + parseInt(fromissues, 10) - 1;
@@ -174,7 +174,7 @@
 
 
             function noofissues() {
-                var issues = document.getElementById("noofissues");
+                var issues = document.getElementById("totalissues");
                 var issuestext = issues.options[issues.selectedIndex].text;
 
                 if (issuestext == "1 year") {
@@ -584,7 +584,7 @@
 
 
                                 <td class="rowclass" >Postal Address &nbsp;</td>
-                                     <td><textarea name="addressline1" class="myclass" id="addressline1" cols="27" rows="2" maxlength="220" onclick="validateNameContact();"></textarea> 
+                                     <td><input type="text" size="26" name="addressline1" class="myclass" id="addressline1"   onclick="validateNameContact();"> 
                                         <!-- <input name="addressline1" type="text" class="myclass" id="addressline1" size="36"  onclick="validateNameContact();" maxlength="60" > -->
                                 </td>
 
@@ -767,7 +767,7 @@
 
 
                                 <td class="rowclass" >Total no. Of Issues &nbsp;</td>
-                                     <td><input name="noofissues" type="text" class="textField" id="noofissues" size="26" onblur="noofissues();" onkeypress="return validateContactNum(this);" >
+                                     <td><input name="totalissues" type="text" class="textField" id="totalissues" size="26" onblur="noofissues();" onkeypress="return validateContactNum(this);" >
                                 </td>
                             </tr>
 
