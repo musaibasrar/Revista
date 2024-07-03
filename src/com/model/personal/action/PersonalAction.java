@@ -80,6 +80,9 @@ public class PersonalAction {
         } else if (action.equalsIgnoreCase("printCompl")) {
             url = printCompl();
 
+        } else if (action.equalsIgnoreCase("printAddress")) {
+            url = printAddress();
+
         }else if (action.equalsIgnoreCase("viewAllconfirmPrintPaid")) {
             url = viewAllconfirmPrintPaid(page);
 
@@ -188,7 +191,11 @@ public class PersonalAction {
         return url;
     }
 
-    private String advanceSearch() {
+    private String printAddress() {
+		return "printaddress.jsp";
+	}
+
+	private String advanceSearch() {
     	new PersonalService(request, response).distListView();
     	new ExecutiveService(request, response).viewAllExecutive();
 		return "advanceSearch.jsp";

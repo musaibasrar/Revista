@@ -347,6 +347,8 @@ public class PersonalDetailsDAO {
 		                        httpSession.setAttribute("personaltoissueno" + i + "", personal.getToissueno());
 		                        httpSession.setAttribute("personalpid" + i + "", personal.getPid());
 		                        httpSession.setAttribute("personalName" + i + "", personal.getName());
+		                        personal.getAddressline1().toString().replaceAll("\n", "<br/>");
+		                        personal.getAddressline1().toString().replaceAll(" ", "&nbsp;");
 		                        httpSession.setAttribute("personaladdressline1" + i + "", personal.getAddressline1());
 		                        httpSession.setAttribute("personaladdressline2" + i + "", personal.getAddressline2());
 		                        httpSession.setAttribute("personaladdressline2" + i + "", personal.getAddressline2());

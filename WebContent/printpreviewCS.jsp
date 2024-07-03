@@ -103,7 +103,7 @@
 %>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark border-bottom">
-            <a class="navbar-brand" href="#"><img src="images/schoolcarelogoheader.png" height="60" width="200"></a>
+            <a class="navbar-brand" href="#"><img src="images/dawat.jpg" height="50" width="200"></a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id="form2" method="post">
@@ -242,7 +242,7 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                <form action="" method="post" id="form1" class="bodymargin">
+                <form action="Controller?process=PersonalProcess&action=printAddress" method="post" id="form1" class="bodymargin" target="_blank">
 
            
             <div>
@@ -286,11 +286,12 @@
 
                         	</td>
                       		  <td>
-                      		  <button id="print" type="submit"  onclick="window.print();
+                      		  <button id="print" class="btn btn-success" type="submit"><i class="fas fa-print"></i>&nbsp;Print</button>
+                      		  <!-- <button id="print" type="submit"  onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide">
                                     
                                     <i class="fas fa-print"></i>&nbsp;Print
-                                    </button>     
+                                    </button>  -->    
                   		      </td>
 
                 		    </tr>

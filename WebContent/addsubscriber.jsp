@@ -360,7 +360,7 @@
 %>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark border-bottom">
-            <a class="navbar-brand" href="#"><img src="images/schoolcarelogoheader.png" height="60" width="200"></a>
+            <a class="navbar-brand" href="#"><img src="images/dawat.jpg" height="50" width="200"></a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id="form2" method="post">
@@ -584,7 +584,9 @@
 
 
                                 <td class="rowclass" >Postal Address &nbsp;</td>
-                                     <td><input type="text" size="26" name="addressline1" class="myclass" id="addressline1"   onclick="validateNameContact();"> 
+                                     <td>
+                                     <textarea class="form-control" id="addressline1" name="addressline1" rows="5"></textarea>
+                                     <!-- <input type="text" size="26" name="addressline1" class="myclass" id="addressline1"   onclick="validateNameContact();">  -->
                                         <!-- <input name="addressline1" type="text" class="myclass" id="addressline1" size="36"  onclick="validateNameContact();" maxlength="60" > -->
                                 </td>
 
